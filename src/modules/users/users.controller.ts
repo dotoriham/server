@@ -10,8 +10,8 @@ export class UsersController {
     return this.usersService.getHello();
   }
 
-  @Get('/test')
-  test(): string {
-    return this.usersService.test();
+  @Get('/me')
+  getMe(): string {
+    return this.usersService.getMe();
   }
 }
