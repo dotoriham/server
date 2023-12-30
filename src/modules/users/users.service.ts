@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserEntity } from './user.entity';
+import { UserEntity } from './users.entity';
 import { Repository } from 'typeorm';
 
 const ME_MOCK = {
