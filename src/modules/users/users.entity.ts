@@ -27,9 +27,6 @@ export class UserEntity {
   })
   gender: string;
 
-  @Column({ type: 'int' })
-  age: number;
-
   @Column({ nullable: true })
   image: string | null;
 
