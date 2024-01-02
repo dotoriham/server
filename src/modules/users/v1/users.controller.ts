@@ -7,8 +7,8 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
-  async create(@Body() book: UserEntity): Promise<UserEntity> {
-    return await this.usersService.create(book);
+  async create(@Body() users: UserEntity): Promise<UserEntity> {
+    return await this.usersService.create(users);
   }
 
   @Get()

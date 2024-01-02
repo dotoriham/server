@@ -1,12 +1,16 @@
 import { Module } from '@nestjs/common';
-import { UsersService } from './users.service';
-import { UsersController } from './users.controller';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserEntity } from './users.entity';
+import { UsersV1Module } from './v1/users.v1.module';
+import { RouterModule } from '@nestjs/core';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([UserEntity])],
-  controllers: [UsersController],
-  providers: [UsersService],
+  imports: [
+    UsersV1Module,
+    RouterModule.register([
+      {
+        path: 'v1',
+        module: UsersV1Module,
+      },
+    ]),
+  ],
 })
 export class UsersModule {}
