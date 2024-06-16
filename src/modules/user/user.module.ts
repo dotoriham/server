@@ -1,16 +1,16 @@
 import { Module } from '@nestjs/common';
-import { UsersV1Module } from './v1/users.v1.module';
 import { RouterModule } from '@nestjs/core';
+import { UserV1Module } from './v1/user.v1.module';
 
 @Module({
   imports: [
-    UsersV1Module,
+    UserV1Module,
     RouterModule.register([
       {
         path: 'v1',
-        module: UsersV1Module,
+        module: UserV1Module,
       },
     ]),
   ],
 })
-export class UsersModule {}
+export class UserModule {}
