@@ -10,18 +10,22 @@ import {
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './user.dto';
+import { Response } from 'express';
 
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
-  async createUser(@Res() response, @Body() createStudentDto: CreateUserDto) {
+  async createUser(
+    @Res() response: Response,
+    @Body() createUserDto: CreateUserDto,
+  ) {
     try {
-      const newStudent = await this.userService.createUser(createStudentDto);
+      const newUser = await this.userService.createUser(createUserDto);
       return response.status(HttpStatus.CREATED).json({
-        message: 'Student has been created successfully',
-        newStudent,
+        message: '유저가 생성되었습니다.',
+        user: newUser,
       });
     } catch (err) {
       return response.status(HttpStatus.BAD_REQUEST).json({
@@ -32,25 +36,14 @@ export class UserController {
     }
   }
 
-  @Get()
-  async getUsers(@Res() response) {
-    try {
-      const studentData = await this.userService.getAllUsers();
-      return response.status(HttpStatus.OK).json({
-        message: 'All students data found successfully',
-        studentData,
-      });
-    } catch (err) {
-      return response.status(err.status).json(err.response);
-    }
-  }
   @Get('/:id')
-  async getUser(@Res() response, @Param('id') studentId: string) {
+  async getUser(@Res() response: Response, @Param('id') userId: string) {
     try {
-      const existingStudent = await this.userService.getUser(studentId);
+      const user = await this.userService.getUser(userId);
+
       return response.status(HttpStatus.OK).json({
         message: 'Student found successfully',
-        existingStudent,
+        user,
       });
     } catch (err) {
       return response.status(err.status).json(err.response);
@@ -59,10 +52,10 @@ export class UserController {
   @Delete('/:id')
   async deleteUser(@Res() response, @Param('id') studentId: string) {
     try {
-      const deletedStudent = await this.userService.deleteUser(studentId);
+      const user = await this.userService.deleteUser(studentId);
       return response.status(HttpStatus.OK).json({
-        message: 'Student deleted successfully',
-        deletedStudent,
+        message: 'User deleted successfully',
+        user,
       });
     } catch (err) {
       return response.status(err.status).json(err.response);
