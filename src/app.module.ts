@@ -7,7 +7,6 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { UserModule } from './modules/user/user.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { FolderModule } from './modules/folder/folder.module';
-import { DotoriModule } from './modules/dotori/dotori.module';
 import { BookmarkModule } from './modules/bookmark/bookmark.module';
 
 @Module({
@@ -20,7 +19,6 @@ import { BookmarkModule } from './modules/bookmark/bookmark.module';
     UserModule,
     AuthModule,
     FolderModule,
-    DotoriModule,
     BookmarkModule,
   ],
   controllers: [AppController],
