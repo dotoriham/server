@@ -1,16 +1,21 @@
 import { Module } from '@nestjs/common';
-import { RouterModule } from '@nestjs/core';
-import { UserV1Module } from './v1/user.v1.module';
+import { MongooseModule } from '@nestjs/mongoose';
+import { USER_MODULE_NAME } from './constants';
+import { UserSchema } from './user.schema';
+import { UserController } from './user.controller';
+import { UserService } from './user.service';
+import { UserRepository } from './user.repository';
 
 @Module({
   imports: [
-    UserV1Module,
-    RouterModule.register([
+    MongooseModule.forFeature([
       {
-        path: 'v1',
-        module: UserV1Module,
+        name: USER_MODULE_NAME,
+        schema: UserSchema,
       },
     ]),
   ],
+  controllers: [UserController],
+  providers: [UserService, UserRepository],
 })
 export class UserModule {}

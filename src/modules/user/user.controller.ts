@@ -12,7 +12,7 @@ import { UserService } from './user.service';
 import { CreateUserDto } from './user.dto';
 import { Response } from 'express';
 
-@Controller('user')
+@Controller('/v1/user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
@@ -30,8 +30,8 @@ export class UserController {
     } catch (err) {
       return response.status(HttpStatus.BAD_REQUEST).json({
         statusCode: 400,
-        message: 'Error: Student not created!',
-        error: 'Bad Request',
+        message: '유저 생성에 실패했습니다.',
+        error: err,
       });
     }
   }
@@ -42,7 +42,7 @@ export class UserController {
       const user = await this.userService.getUser(userId);
 
       return response.status(HttpStatus.OK).json({
-        message: 'Student found successfully',
+        message: '유저를 조회헀습니다.',
         user,
       });
     } catch (err) {
@@ -54,7 +54,7 @@ export class UserController {
     try {
       const user = await this.userService.deleteUser(studentId);
       return response.status(HttpStatus.OK).json({
-        message: 'User deleted successfully',
+        message: '유저를 성공적으로 삭제했씁니다.',
         user,
       });
     } catch (err) {
